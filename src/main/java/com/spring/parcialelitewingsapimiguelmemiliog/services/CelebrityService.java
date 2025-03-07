@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Validated
@@ -44,16 +45,25 @@ public class CelebrityService implements ICelebrityService{
 
     @Override
     public Optional<CelebrityDTO> getCelebrity(Long id) {
-        return Optional.empty();
+        return celebrityRepository.findById(id).map(this::convertToDTO);
     }
 
     @Override
     public Optional<CelebrityDTO> updateCelebrity(Long id, CelebrityDTO celebrity) {
-        return Optional.empty();
+        Optional<Celebrity> foundCeleb = celebrityRepository.findById(id);
+            foundCeleb.get().setId(celebrity.getId());
+            foundCeleb.get().setName(celebrity.getName());
+            foundCeleb.get().setProfession(celebrity.getProfession());
+            foundCeleb.get().setNet_worth(celebrity.getNet_worth());
+            foundCeleb.get().setSuspicious_activity(celebrity.isSuspicious_activity());
+            foundCeleb.get().setJets(celebrity.getJets());
+
+            celebrityRepository.save(foundCeleb.get());
+            return foundCeleb.map(this::convertToDTO);
     }
 
     @Override
     public void deleteCelebrity(Long id) {
-
+        celebrityRepository.deleteById(id);
     }
 }
