@@ -2,6 +2,7 @@ package com.spring.parcialelitewingsapimiguelmemiliog.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -11,6 +12,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 @AllArgsConstructor
 @Entity
 @Table(name= "airport")
+@Builder
 public class airport {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

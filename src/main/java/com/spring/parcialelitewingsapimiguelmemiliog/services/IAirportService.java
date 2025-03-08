@@ -1,9 +1,12 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.services;
 
+import com.spring.parcialelitewingsapimiguelmemiliog.dto.AirportDTO;
 import com.spring.parcialelitewingsapimiguelmemiliog.models.airport;
+import java.util.List;
 
 import java.util.Optional;
 
 public interface IAirportService {
-    Optional<airport> encontrarPorId(String id);
+    Optional<AirportDTO> encontrarPorId(String id);
+    List<airport> encontrarAeropuertos();
 }
