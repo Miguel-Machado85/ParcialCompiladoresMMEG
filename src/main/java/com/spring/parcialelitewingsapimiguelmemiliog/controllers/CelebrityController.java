@@ -21,7 +21,7 @@ public class CelebrityController {
     private ICelebrityService celebrityService;
 
     @PostMapping("/")
-    public ResponseEntity<?> createCelebrity(@Valid @RequestBody CelebrityDTO celebrityDTO) {
+    public ResponseEntity<?> registerCelebrity(@Valid @RequestBody CelebrityDTO celebrityDTO) {
         CelebrityDTO celeb = celebrityService.addCelebrity(celebrityDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(celeb);
     }
@@ -38,17 +38,16 @@ public class CelebrityController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCelebrity(@PathVariable Long id, @Valid @RequestBody CelebrityDTO celebrityDTO) {
-        Optional<CelebrityDTO> foundCeleb = celebrityService.getCelebrity(id);
-        if (foundCeleb.isPresent()) {
-            celebrityService.updateCelebrity(id, celebrityDTO);
-            return ResponseEntity.ok(celebrityDTO);
+        Optional<CelebrityDTO> updatedCeleb = celebrityService.updateCelebrity(id, celebrityDTO);
+        if (updatedCeleb.isPresent()) {
+            return ResponseEntity.ok(updatedCeleb.get());
         } else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Celebrity not found");
         }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCelebrity(@PathVariable Long id) {
+    public ResponseEntity<?> removeCelebrity(@PathVariable Long id) {
         celebrityService.deleteCelebrity(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Celebrity deleted successfully");
     }

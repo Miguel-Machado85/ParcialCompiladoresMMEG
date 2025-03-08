@@ -18,7 +18,7 @@ public class CelebrityService implements ICelebrityService{
     @Autowired
     private ICelebrityRepository celebrityRepository;
 
-    private CelebrityDTO convertToDTO(Celebrity celebrity) {
+    private CelebrityDTO convertCelebToDTO(Celebrity celebrity) {
         return new CelebrityDTO(celebrity.getId(),
                 celebrity.getName(),
                 celebrity.getProfession(),
@@ -39,18 +39,20 @@ public class CelebrityService implements ICelebrityService{
 
         celebrity = celebrityRepository.save(celebrity);
 
-        return convertToDTO(celebrity);
+        return convertCelebToDTO(celebrity);
 
     }
 
     @Override
     public Optional<CelebrityDTO> getCelebrity(Long id) {
-        return celebrityRepository.findById(id).map(this::convertToDTO);
+        return celebrityRepository.findById(id).map(this::convertCelebToDTO);
     }
 
     @Override
-    public Optional<CelebrityDTO> updateCelebrity(Long id, CelebrityDTO celebrity) {
+    public Optional<CelebrityDTO> updateCelebrity(Long id,@Valid CelebrityDTO celebrity) {
         Optional<Celebrity> foundCeleb = celebrityRepository.findById(id);
+
+        if(foundCeleb.isPresent()) {
             foundCeleb.get().setId(celebrity.getId());
             foundCeleb.get().setName(celebrity.getName());
             foundCeleb.get().setProfession(celebrity.getProfession());
@@ -59,7 +61,10 @@ public class CelebrityService implements ICelebrityService{
             foundCeleb.get().setJets(celebrity.getJets());
 
             celebrityRepository.save(foundCeleb.get());
-            return foundCeleb.map(this::convertToDTO);
+            return foundCeleb.map(this::convertCelebToDTO);
+        } else{
+            return Optional.empty();
+        }
     }
 
     @Override
