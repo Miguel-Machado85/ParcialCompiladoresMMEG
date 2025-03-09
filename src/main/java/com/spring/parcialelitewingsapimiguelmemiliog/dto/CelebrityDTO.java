@@ -1,6 +1,7 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.dto;
 
 
+import com.spring.parcialelitewingsapimiguelmemiliog.models.Flights;
 import com.spring.parcialelitewingsapimiguelmemiliog.models.PrivateJet;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -28,4 +29,6 @@ public class CelebrityDTO {
     private boolean suspicious_activity;
 
     private List<PrivateJet> jets;
+
+    private Flights flight;
 }

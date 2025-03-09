@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AirportService implements IAirportService {
@@ -40,7 +41,8 @@ public class AirportService implements IAirportService {
     }
 
     @Override
-    public List<airport> encontrarAeropuertos() {
-        return airportRepository.findAll();
+    public List<AirportDTO> encontrarAeropuertos() {
+        List<airport> aeropuertos= airportRepository.findAll();
+        return aeropuertos.stream().map(this::EntitytoDTO).collect(Collectors.toList());
     }
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface IAirportService {
     Optional<AirportDTO> encontrarPorId(String id);
-    List<airport> encontrarAeropuertos();
+    List<AirportDTO> encontrarAeropuertos();
 }

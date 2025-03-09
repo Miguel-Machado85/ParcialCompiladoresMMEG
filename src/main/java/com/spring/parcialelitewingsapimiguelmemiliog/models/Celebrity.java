@@ -34,4 +34,7 @@ public class Celebrity {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnore
     private List<PrivateJet> jets;
+
+    @OneToOne(mappedBy = "celebrity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Flights flight;
 }

@@ -25,4 +25,7 @@ public class PrivateJet {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
     private Celebrity owner;
+
+    @OneToOne(mappedBy = "privateJet", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Flights flight;
 }

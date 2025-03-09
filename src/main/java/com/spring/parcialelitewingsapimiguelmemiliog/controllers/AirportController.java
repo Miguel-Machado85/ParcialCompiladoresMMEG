@@ -31,7 +31,7 @@ public class AirportController {
     }
 
     @GetMapping(path = "/airport")
-    public ResponseEntity<List<airport>> listAirport(){
-        return new ResponseEntity<List<airport>>(airportService.encontrarAeropuertos(), HttpStatus.OK);
+    public ResponseEntity<List<AirportDTO>> listAirport(){
+        return new ResponseEntity<List<AirportDTO>>(airportService.encontrarAeropuertos(), HttpStatus.OK);
     }
 }
