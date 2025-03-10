@@ -16,14 +16,18 @@ public class Flights {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
+    @Column()
     private String departureAirport;
 
+    @Column()
     private String arrivalAirport;
 
+    @Column()
     private String departureTime;
 
+    @Column()
     private String arrivalTime;
 
     @OneToOne
@@ -33,4 +37,13 @@ public class Flights {
     @OneToOne
     @JoinColumn(name = "jet_Id")
     private PrivateJet privateJet;
+
+    @Enumerated(EnumType.STRING)
+    private Purpose purpose;
+
+    public enum Purpose{
+        Business,
+        Vacation,
+        Suspicious;
+    }
 }

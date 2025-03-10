@@ -1,8 +1,10 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.dto;
 
+import com.spring.parcialelitewingsapimiguelmemiliog.models.Flights;
 import com.spring.parcialelitewingsapimiguelmemiliog.models.PrivateJet;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
@@ -10,8 +12,9 @@ import jakarta.validation.constraints.NotNull;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class FlightsDTO {
-    private String id;
+    private Long id;
 
     @NotBlank(message = "The departure airport must be listed.")
     private String departureAirport;
@@ -25,7 +28,10 @@ public class FlightsDTO {
     @NotBlank(message = "The flight must have an arrival time.")
     private String arrivalTime;
 
-    private String celebrity_Id;
+    private Long celebrity_Id;
 
-    private String jet_Id;
+    private Long jet_Id;
+
+    @NotBlank(message = "Valid purpose required")
+    private Flights.Purpose purpose;
 }

@@ -16,15 +16,6 @@ public class AirportService implements IAirportService {
     @Autowired
     private IAirportRepository airportRepository;
 
-    private airport DTOtoEntity(AirportDTO airportDTO) {
-        return airport.builder()
-                .id(airportDTO.getId())
-                .nombre(airportDTO.getNombre())
-                .direccion(airportDTO.getDireccion())
-                .capacidad(airportDTO.getCapacidad())
-                .dueños(airportDTO.getDueños()).build();
-    }
-
     private AirportDTO EntitytoDTO(airport airport) {
         return AirportDTO.builder()
                 .id(airport.getId())
@@ -35,7 +26,7 @@ public class AirportService implements IAirportService {
     }
 
     @Override
-    public Optional<AirportDTO> encontrarPorId(String id) {
+    public Optional<AirportDTO> encontrarPorId(Long id) {
         Optional<airport> aeropuertoEncontrado = airportRepository.findById(id);
         return aeropuertoEncontrado.map(this::EntitytoDTO);
     }

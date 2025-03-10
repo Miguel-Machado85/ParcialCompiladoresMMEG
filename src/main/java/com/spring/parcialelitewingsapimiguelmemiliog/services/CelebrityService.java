@@ -24,7 +24,8 @@ public class CelebrityService implements ICelebrityService{
                 celebrity.getProfession(),
                 celebrity.getNet_worth(),
                 celebrity.isSuspicious_activity(),
-                celebrity.getJets());
+                celebrity.getJets(),
+                celebrity.getFlight());
     }
 
     @Override

@@ -17,14 +17,10 @@ import java.util.Optional;
 @RestController
 public class AirportController {
     @Autowired
-    private AirportService airportService;
-
-    public AirportController(AirportService airportService) {
-        this.airportService = airportService;
-    }
+    private IAirportService airportService;
 
     @GetMapping(path = "/airport/{id}")
-    public ResponseEntity<AirportDTO> getAirport(@PathVariable String id){
+    public ResponseEntity<AirportDTO> getAirport(@PathVariable Long id){
         Optional<AirportDTO> aeropuertoEncontrado= airportService.encontrarPorId(id);
         return aeropuertoEncontrado.map(airportDTO -> new ResponseEntity<AirportDTO>(airportDTO, HttpStatus.OK))
                 .orElse(new ResponseEntity<AirportDTO>(HttpStatus.NOT_FOUND));

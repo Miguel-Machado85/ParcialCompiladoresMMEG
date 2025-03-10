@@ -16,7 +16,7 @@ import org.antlr.v4.runtime.misc.NotNull;
 public class airport {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(unique = true, nullable=false)
     private String nombre;
