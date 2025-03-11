@@ -1,8 +1,6 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.controllers;
 
 import com.spring.parcialelitewingsapimiguelmemiliog.dto.CelebrityDTO;
-import com.spring.parcialelitewingsapimiguelmemiliog.models.Celebrity;
-import com.spring.parcialelitewingsapimiguelmemiliog.services.CelebrityService;
 import com.spring.parcialelitewingsapimiguelmemiliog.services.ICelebrityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

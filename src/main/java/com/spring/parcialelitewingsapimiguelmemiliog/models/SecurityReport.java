@@ -27,7 +27,6 @@ public class SecurityReport {
     private boolean isResolved= false;
 
     @OneToOne
-    @JoinColumn(name = "jet_Id")
-    private PrivateJet privateJet;
-
+    @JoinColumn(name = "flight_Id")
+    private Flights flight;
 }

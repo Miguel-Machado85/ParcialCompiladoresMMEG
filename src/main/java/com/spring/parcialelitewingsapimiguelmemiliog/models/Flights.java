@@ -1,5 +1,6 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,11 +31,11 @@ public class Flights {
     @Column()
     private String arrivalTime;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "celebrity_Id")
     private Celebrity celebrity;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "jet_Id")
     private PrivateJet privateJet;
 
@@ -46,4 +47,8 @@ public class Flights {
         Vacation,
         Suspicious;
     }
+
+    @OneToOne(mappedBy = "flight", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private SecurityReport securityReport;
 }

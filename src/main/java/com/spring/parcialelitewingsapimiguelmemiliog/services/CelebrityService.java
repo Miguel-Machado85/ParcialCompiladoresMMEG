@@ -23,9 +23,7 @@ public class CelebrityService implements ICelebrityService{
                 celebrity.getName(),
                 celebrity.getProfession(),
                 celebrity.getNet_worth(),
-                celebrity.isSuspicious_activity(),
-                celebrity.getJets(),
-                celebrity.getFlight());
+                celebrity.isSuspicious_activity());
     }
 
     @Override
@@ -36,7 +34,6 @@ public class CelebrityService implements ICelebrityService{
         celebrity.setProfession(celebrityDTO.getProfession());
         celebrity.setNet_worth(celebrityDTO.getNet_worth());
         celebrity.setSuspicious_activity(celebrityDTO.isSuspicious_activity());
-        celebrity.setJets(celebrityDTO.getJets());
 
         celebrity = celebrityRepository.save(celebrity);
 
@@ -59,7 +56,6 @@ public class CelebrityService implements ICelebrityService{
             foundCeleb.get().setProfession(celebrity.getProfession());
             foundCeleb.get().setNet_worth(celebrity.getNet_worth());
             foundCeleb.get().setSuspicious_activity(celebrity.isSuspicious_activity());
-            foundCeleb.get().setJets(celebrity.getJets());
 
             celebrityRepository.save(foundCeleb.get());
             return foundCeleb.map(this::convertCelebToDTO);

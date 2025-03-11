@@ -22,5 +22,5 @@ public class SecurityReportDTO {
 
     private boolean isResolved= false;
 
-    private Long jet_Id;
+    private Long flight_Id;
 }

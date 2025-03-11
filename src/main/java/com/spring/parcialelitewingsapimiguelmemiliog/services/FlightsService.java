@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -79,5 +81,11 @@ public class FlightsService implements IFlightsService {
         } catch (EmptyResultDataAccessException e) {
             log.debug("Can't delete non existing flight", e);
         }
+    }
+
+    @Override
+    public List<FlightsDTO> retrieveFlaggedFlights() {
+        List<FlightsDTO> flaggedFlights= flightsRepository.findFlightsByPurpose("Suspicious").stream().map(this::EntityToDTO).collect(Collectors.toList());
+        return flaggedFlights;
     }
 }

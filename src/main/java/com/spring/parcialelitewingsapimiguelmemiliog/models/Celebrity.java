@@ -19,7 +19,7 @@ public class Celebrity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column()
     private String name;
 
     @Column()
@@ -35,6 +35,7 @@ public class Celebrity {
     @JsonIgnore
     private List<PrivateJet> jets;
 
-    @OneToOne(mappedBy = "celebrity", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Flights flight;
+    @OneToMany(mappedBy = "celebrity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Flights> flights;
 }

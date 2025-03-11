@@ -27,8 +27,4 @@ public class CelebrityDTO {
     private float net_worth;
 
     private boolean suspicious_activity;
-
-    private List<PrivateJet> jets;
-
-    private Flights flight;
 }

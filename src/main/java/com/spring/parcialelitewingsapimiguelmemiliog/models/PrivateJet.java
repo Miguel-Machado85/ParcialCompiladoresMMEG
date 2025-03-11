@@ -1,9 +1,12 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -26,9 +29,8 @@ public class PrivateJet {
     @JoinColumn(name = "owner_id")
     private Celebrity owner;
 
-    @OneToOne(mappedBy = "privateJet", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Flights flight;
+    @OneToMany(mappedBy = "privateJet", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Flights> flight;
 
-    @OneToOne(mappedBy = "privateJet", cascade = CascadeType.ALL, orphanRemoval = true)
-    private SecurityReport securityReport;
 }

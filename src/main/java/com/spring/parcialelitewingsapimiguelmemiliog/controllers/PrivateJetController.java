@@ -1,7 +1,7 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.controllers;
 
 import com.spring.parcialelitewingsapimiguelmemiliog.dto.PrivateJetDTO;
-import com.spring.parcialelitewingsapimiguelmemiliog.services.PrivateJetService;
+import com.spring.parcialelitewingsapimiguelmemiliog.services.IPrivateJetService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class PrivateJetController {
 
     @Autowired
-    private PrivateJetService privateJetService;
+    private IPrivateJetService privateJetService;
 
     @GetMapping("/")
     public ResponseEntity<?> addJet(@Valid @RequestBody PrivateJetDTO privateJetDTO){
