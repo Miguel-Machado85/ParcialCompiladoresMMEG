@@ -7,12 +7,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class SecurityReportController {
@@ -30,5 +28,11 @@ public class SecurityReportController {
     public ResponseEntity<List<SecurityReportDTO>> getUnresolvedReports() {
         List<SecurityReportDTO> unresolvedReports = securityReportService.getUnresolvedReports();
         return ResponseEntity.status(HttpStatus.OK).body(unresolvedReports);
+    }
+
+    @PatchMapping(path = "/{id}/resolve")
+    public ResponseEntity<SecurityReportDTO> resolveReport(@PathVariable Long id) {
+        SecurityReportDTO report = securityReportService.resolveReport(id);
+        return ResponseEntity.status(HttpStatus.OK).body(report);
     }
 }

@@ -8,11 +8,13 @@ import com.spring.parcialelitewingsapimiguelmemiliog.models.PrivateJet;
 import com.spring.parcialelitewingsapimiguelmemiliog.models.SecurityReport;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.IFlightsRepository;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.ISecurityReportRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,7 +49,7 @@ public class SecurityReportService implements ISecurityReportService {
     }
 
     @Override
-    public SecurityReportDTO registerReport(SecurityReportDTO securityreportDTO) {
+    public SecurityReportDTO registerReport(@Valid SecurityReportDTO securityreportDTO) {
         SecurityReport securityReport = DTOtoEntity(securityreportDTO);
         SecurityReport savedReport= securityReportRepository.save(securityReport);
         return EntityToDTO(savedReport);
@@ -60,7 +62,14 @@ public class SecurityReportService implements ISecurityReportService {
     }
 
     @Override
-    public void resolveReport(Long id) {
-
+    public SecurityReportDTO resolveReport(Long id) {
+        Optional<SecurityReport> securityReport = securityReportRepository.findById(id);
+        if (securityReport.isPresent() && !securityReport.get().isResolved()) {
+            securityReport.get().setResolved(true);
+            securityReportRepository.save(securityReport.get());
+            return EntityToDTO(securityReport.get());
+        } else{
+            return null;
+        }
     }
 }

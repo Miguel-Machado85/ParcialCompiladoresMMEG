@@ -7,5 +7,5 @@ import java.util.List;
 public interface ISecurityReportService {
     SecurityReportDTO registerReport(SecurityReportDTO securityreportDTO);
     List<SecurityReportDTO> getUnresolvedReports();
-    void resolveReport(Long id);
+    SecurityReportDTO resolveReport(Long id);
 }
