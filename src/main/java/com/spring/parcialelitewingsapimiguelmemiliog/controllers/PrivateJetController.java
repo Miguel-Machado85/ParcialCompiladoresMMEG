@@ -18,34 +18,28 @@ public class PrivateJetController {
     private IPrivateJetService privateJetService;
 
     @GetMapping("/")
-    public ResponseEntity<?> addJet(@Valid @RequestBody PrivateJetDTO privateJetDTO){
+    public ResponseEntity<PrivateJetDTO> addJet(@Valid @RequestBody PrivateJetDTO privateJetDTO){
         PrivateJetDTO addedJet = privateJetService.addPrivateJet(privateJetDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedJet);
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> getJetDetails(@PathVariable Long id){
+    public ResponseEntity<PrivateJetDTO> getJetDetails(@PathVariable Long id){
         Optional<PrivateJetDTO> foundJet = privateJetService.getPrivateJetById(id);
-        if(foundJet.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(foundJet);
-        }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Jet not found");
-        }
+        return foundJet.map(privateJetDTO -> new ResponseEntity<PrivateJetDTO>(privateJetDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<PrivateJetDTO>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateJet(@PathVariable Long id, @Valid @RequestBody PrivateJetDTO privateJetDTO){
+    public ResponseEntity<PrivateJetDTO> updateJet(@PathVariable Long id, @Valid @RequestBody PrivateJetDTO privateJetDTO){
         Optional<PrivateJetDTO> updatedJet = privateJetService.updatePrivateJet(id, privateJetDTO);
-        if(updatedJet.isPresent()){
-            return ResponseEntity.status(HttpStatus.OK).body(updatedJet);
-        } else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Jet not found");
-        }
+        return updatedJet.map(privateJetDTO1 -> new ResponseEntity<PrivateJetDTO>(privateJetDTO1, HttpStatus.OK))
+                .orElse(new ResponseEntity<PrivateJetDTO>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteJet(@PathVariable Long id){
+    public ResponseEntity<PrivateJetDTO> deleteJet(@PathVariable Long id){
         privateJetService.deletePrivateJet(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Jet deleted successfully");
+        return new ResponseEntity<PrivateJetDTO>(HttpStatus.NO_CONTENT);
     }
 }

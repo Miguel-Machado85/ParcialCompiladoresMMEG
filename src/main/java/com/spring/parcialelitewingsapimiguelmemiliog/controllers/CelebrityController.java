@@ -19,34 +19,28 @@ public class CelebrityController {
     private ICelebrityService celebrityService;
 
     @PostMapping("/")
-    public ResponseEntity<?> registerCelebrity(@Valid @RequestBody CelebrityDTO celebrityDTO) {
+    public ResponseEntity<CelebrityDTO> registerCelebrity(@Valid @RequestBody CelebrityDTO celebrityDTO) {
         CelebrityDTO celeb = celebrityService.addCelebrity(celebrityDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(celeb);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getCelebrityById(@PathVariable Long id) {
+    public ResponseEntity<CelebrityDTO> getCelebrityById(@PathVariable Long id) {
         Optional<CelebrityDTO> foundCeleb = celebrityService.getCelebrity(id);
-        if (foundCeleb.isPresent()) {
-            return ResponseEntity.ok(foundCeleb);
-        } else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Celebrity not found");
-        }
+        return foundCeleb.map(celebrityDTO -> new ResponseEntity<CelebrityDTO>(celebrityDTO, HttpStatus.OK))
+                .orElse(new ResponseEntity<CelebrityDTO>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCelebrity(@PathVariable Long id, @Valid @RequestBody CelebrityDTO celebrityDTO) {
         Optional<CelebrityDTO> updatedCeleb = celebrityService.updateCelebrity(id, celebrityDTO);
-        if (updatedCeleb.isPresent()) {
-            return ResponseEntity.ok(updatedCeleb.get());
-        } else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Celebrity not found");
-        }
+        return updatedCeleb.map(celebrityDTO1 -> new ResponseEntity<CelebrityDTO>(celebrityDTO1, HttpStatus.OK))
+                .orElse(new ResponseEntity<CelebrityDTO>(HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeCelebrity(@PathVariable Long id) {
+    public ResponseEntity<CelebrityDTO> removeCelebrity(@PathVariable Long id) {
         celebrityService.deleteCelebrity(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Celebrity deleted successfully");
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
