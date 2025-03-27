@@ -7,10 +7,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
+
+
 @AllArgsConstructor
-@Builder
+
 public class AirportDTO {
     private Long id;
 
@@ -24,4 +24,53 @@ public class AirportDTO {
     private int capacidad;
 
     private String dueños;
+
+
+    public AirportDTO(){
+
+    }
+
+    public static AirportDTO builder(){
+        return new AirportDTO();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public String getDueños() {
+        return dueños;
+    }
+
+    public void setDueños(String dueños) {
+        this.dueños = dueños;
+    }
 }
