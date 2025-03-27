@@ -18,8 +18,8 @@ public class AirportService implements IAirportService {
 
     private AirportDTO EntitytoDTO(airport airport) {
         return AirportDTO.builder()
-                .id(airport.getId())
-                .nombre(airport.getNombre())
+                .setId(airport.getId())
+                .setNombre(airport.getNombre())
                 .direccion(airport.getDireccion())
                 .capacidad(airport.getCapacidad())
                 .dueños(airport.getDueños()).build();
