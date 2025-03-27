@@ -57,7 +57,7 @@ public class SecurityReportService implements ISecurityReportService {
 
     @Override
     public List<SecurityReportDTO> getUnresolvedReports() {
-        List<SecurityReportDTO> unresolvedReports = securityReportRepository.findSecurityReportByResolved(false).stream().map(this::EntityToDTO).toList();
+        List<SecurityReportDTO> unresolvedReports = securityReportRepository.findSecurityReportByIsResolved(false).stream().map(this::EntityToDTO).toList();
         return unresolvedReports;
     }
 
