@@ -20,9 +20,9 @@ public class AirportService implements IAirportService {
         return AirportDTO.builder()
                 .setId(airport.getId())
                 .setNombre(airport.getNombre())
-                .direccion(airport.getDireccion())
-                .capacidad(airport.getCapacidad())
-                .dueños(airport.getDueños()).build();
+                .setDireccion(airport.getDireccion())
+                .setCapacidad(airport.getCapacidad())
+                .setDueños(airport.getDueños()).build();
     }
 
     @Override

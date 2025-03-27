@@ -3,13 +3,11 @@ package com.spring.parcialelitewingsapimiguelmemiliog.services;
 import com.spring.parcialelitewingsapimiguelmemiliog.dto.AirportDTO;
 import com.spring.parcialelitewingsapimiguelmemiliog.dto.CelebrityDTO;
 import com.spring.parcialelitewingsapimiguelmemiliog.dto.FlightsDTO;
-import com.spring.parcialelitewingsapimiguelmemiliog.models.Celebrity;
-import com.spring.parcialelitewingsapimiguelmemiliog.models.Flights;
-import com.spring.parcialelitewingsapimiguelmemiliog.models.PrivateJet;
-import com.spring.parcialelitewingsapimiguelmemiliog.models.airport;
+import com.spring.parcialelitewingsapimiguelmemiliog.models.*;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.ICelebrityRepository;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.IFlightsRepository;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.IPrivateJetRepository;
+import com.spring.parcialelitewingsapimiguelmemiliog.repositories.ISecurityReportRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -32,16 +30,21 @@ public class FlightsService implements IFlightsService {
     @Autowired
     private IPrivateJetRepository privateJetRepository;
 
+    @Autowired
+    private ISecurityReportRepository securityReportRepository;
+
     private FlightsDTO EntityToDTO(Flights flights) {
         return FlightsDTO.builder()
-                .id(flights.getId())
-                .departureAirport(flights.getDepartureAirport())
-                .arrivalAirport(flights.getArrivalAirport())
-                .departureTime(flights.getDepartureTime())
-                .arrivalTime(flights.getArrivalTime())
-                .celebrity_Id(flights.getCelebrity().getId())
-                .jet_Id(flights.getPrivateJet().getId())
-                .purpose(flights.getPurpose()).build();
+                .setId(flights.getId())
+                .setDepartureAirport(flights.getDepartureAirport())
+                .setArrivalAirport(flights.getArrivalAirport())
+                .setDepartureTime(flights.getDepartureTime())
+                .setArrivalTime(flights.getArrivalTime())
+                .setCelebrity_Id(flights.getCelebrity().getId())
+                .setJet_Id(flights.getPrivateJet().getId())
+                .setPurpose(flights.getPurpose())
+                .setSecurityReport_Id(flights.getSecurityReport().getId())
+                .build();
     }
 
     private Flights DTOtoEntity(FlightsDTO flightsDTO) {
@@ -49,15 +52,18 @@ public class FlightsService implements IFlightsService {
 
         PrivateJet privateJet = privateJetRepository.findById(flightsDTO.getJet_Id()).get();
 
+        SecurityReport securityReport = securityReportRepository.findById(flightsDTO.getSecurityReport_Id()).get();
+
         return Flights.builder()
-                .id(flightsDTO.getId())
-                .departureAirport(flightsDTO.getDepartureAirport())
-                .arrivalAirport(flightsDTO.getArrivalAirport())
-                .departureTime(flightsDTO.getDepartureTime())
-                .arrivalTime(flightsDTO.getArrivalTime())
-                .celebrity(celebrity)
-                .privateJet(privateJet)
-                .purpose(flightsDTO.getPurpose())
+                .setId(flightsDTO.getId())
+                .setDepartureAirport(flightsDTO.getDepartureAirport())
+                .setArrivalAirport(flightsDTO.getArrivalAirport())
+                .setDepartureTime(flightsDTO.getDepartureTime())
+                .setArrivalTime(flightsDTO.getArrivalTime())
+                .setCelebrity(celebrity)
+                .setPrivateJet(privateJet)
+                .setPurpose(flightsDTO.getPurpose())
+                .setSecurityReport(securityReport)
                 .build();
     }
 
@@ -76,11 +82,7 @@ public class FlightsService implements IFlightsService {
 
     @Override
     public void deleteFlightById(Long id) {
-        try {
-            flightsRepository.deleteById(id);
-        } catch (EmptyResultDataAccessException e) {
-            log.debug("Can't delete non existing flight", e);
-        }
+        flightsRepository.deleteById(id);
     }
 
     @Override

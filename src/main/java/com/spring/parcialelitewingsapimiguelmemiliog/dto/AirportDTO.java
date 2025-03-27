@@ -34,43 +34,52 @@ public class AirportDTO {
         return new AirportDTO();
     }
 
+    public AirportDTO build(){
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public AirportDTO setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    public AirportDTO setNombre(String nombre) {
         this.nombre = nombre;
+        return this;
     }
 
     public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
+    public AirportDTO setDireccion(String direccion) {
         this.direccion = direccion;
+        return this;
     }
 
     public int getCapacidad() {
         return capacidad;
     }
 
-    public void setCapacidad(int capacidad) {
+    public AirportDTO setCapacidad(int capacidad) {
         this.capacidad = capacidad;
+        return this;
     }
 
     public String getDueños() {
         return dueños;
     }
 
-    public void setDueños(String dueños) {
+    public AirportDTO setDueños(String dueños) {
         this.dueños = dueños;
+        return this;
     }
 }

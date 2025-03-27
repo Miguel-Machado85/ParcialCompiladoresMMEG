@@ -23,43 +23,59 @@ public class SecurityReportDTO {
 
     private Long flight_Id;
 
+    public SecurityReportDTO() {
+    }
+
+    public static SecurityReportDTO builder(){
+        return new SecurityReportDTO();
+    }
+
+    public SecurityReportDTO build(){
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public SecurityReportDTO setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getReportedBy() {
         return reportedBy;
     }
 
-    public void setReportedBy(String reportedBy) {
+    public SecurityReportDTO setReportedBy(String reportedBy) {
         this.reportedBy = reportedBy;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public SecurityReportDTO setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public boolean isResolved() {
         return isResolved;
     }
 
-    public void setResolved(boolean resolved) {
+    public SecurityReportDTO setResolved(boolean resolved) {
         isResolved = resolved;
+        return this;
     }
 
     public Long getFlight_Id() {
         return flight_Id;
     }
 
-    public void setFlight_Id(Long flight_Id) {
+    public SecurityReportDTO setFlight_Id(Long flight_Id) {
         this.flight_Id = flight_Id;
+        return this;
     }
 }

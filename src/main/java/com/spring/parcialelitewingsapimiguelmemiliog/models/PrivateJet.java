@@ -33,4 +33,54 @@ public class PrivateJet {
     @JsonIgnore
     private List<Flights> flight;
 
+    public PrivateJet() {
+    }
+
+    public static PrivateJet builder(){
+        return new PrivateJet();
+    }
+
+    public PrivateJet build(){
+        return this;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public Celebrity getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Celebrity owner) {
+        this.owner = owner;
+    }
+
+    public List<Flights> getFlight() {
+        return flight;
+    }
+
+    public void setFlight(List<Flights> flight) {
+        this.flight = flight;
+    }
 }

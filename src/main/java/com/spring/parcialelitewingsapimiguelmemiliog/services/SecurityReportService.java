@@ -27,11 +27,11 @@ public class SecurityReportService implements ISecurityReportService {
 
     private SecurityReportDTO EntityToDTO(SecurityReport securityReport) {
         return SecurityReportDTO.builder()
-                .id(securityReport.getId())
-                .reportedBy(securityReport.getReportedBy())
-                .description(securityReport.getDescription())
-                .isResolved(securityReport.isResolved())
-                .flight_Id(securityReport.getFlight().getId())
+                .setId(securityReport.getId())
+                .setReportedBy(securityReport.getReportedBy())
+                .setDescription(securityReport.getDescription())
+                .setResolved(securityReport.isResolved())
+                .setFlight_Id(securityReport.getFlight().getId())
                 .build();
     }
 
@@ -40,11 +40,11 @@ public class SecurityReportService implements ISecurityReportService {
         Flights flight = flightsRepository.findById(securityReportDTO.getFlight_Id()).get();
 
         return SecurityReport.builder()
-                .id(securityReportDTO.getId())
-                .reportedBy(securityReportDTO.getReportedBy())
-                .description(securityReportDTO.getDescription())
-                .isResolved(securityReportDTO.isResolved())
-                .flight(flight)
+                .setId(securityReportDTO.getId())
+                .setReportedBy(securityReportDTO.getReportedBy())
+                .setDescription(securityReportDTO.getDescription())
+                .setResolved(securityReportDTO.isResolved())
+                .setFlight(flight)
                 .build();
     }
 

@@ -18,6 +18,24 @@ public class PrivateJetDTO {
 
     private Long ownerId;
 
+    public PrivateJetDTO(Long id, String model, int capacity, Long ownerId) {
+        this.id = id;
+        this.model = model;
+        this.capacity = capacity;
+        this.ownerId = ownerId;
+    }
+
+    public PrivateJetDTO() {
+    }
+
+    public static PrivateJetDTO builder(){
+        return new PrivateJetDTO();
+    }
+
+    public PrivateJetDTO build(){
+        return this;
+    }
+
     public Long getId() {
         return id;
     }

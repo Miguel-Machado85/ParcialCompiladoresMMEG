@@ -28,6 +28,25 @@ public class CelebrityDTO {
 
     private boolean suspicious_activity;
 
+    public CelebrityDTO(Long id, String name, String profession, float net_worth, boolean suspicious_activity) {
+        this.id = id;
+        this.name = name;
+        this.profession = profession;
+        this.net_worth = net_worth;
+        this.suspicious_activity = suspicious_activity;
+    }
+
+    public CelebrityDTO() {
+    }
+
+    public static CelebrityDTO builder(){
+        return new CelebrityDTO();
+    }
+
+    public CelebrityDTO build(){
+        return this;
+    }
+
     public Long getId() {
         return id;
     }

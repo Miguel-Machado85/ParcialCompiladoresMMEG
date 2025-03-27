@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotNull;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -34,67 +35,97 @@ public class FlightsDTO {
     @NotBlank(message = "Valid purpose required")
     private Flights.Purpose purpose;
 
+    private Long securityReport_Id;
+
+    public FlightsDTO() {
+    }
+
+    public static FlightsDTO builder(){
+        return new FlightsDTO();
+    }
+
+    public FlightsDTO build(){
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public FlightsDTO setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getDepartureAirport() {
         return departureAirport;
     }
 
-    public void setDepartureAirport(String departureAirport) {
+    public FlightsDTO setDepartureAirport(String departureAirport) {
         this.departureAirport = departureAirport;
+        return this;
     }
 
     public String getArrivalAirport() {
         return arrivalAirport;
     }
 
-    public void setArrivalAirport(String arrivalAirport) {
+    public FlightsDTO setArrivalAirport(String arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
+        return this;
     }
 
     public String getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(String departureTime) {
+    public FlightsDTO setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
+        return this;
     }
 
     public String getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(String arrivalTime) {
+    public FlightsDTO setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
+        return this;
     }
 
     public Long getCelebrity_Id() {
         return celebrity_Id;
     }
 
-    public void setCelebrity_Id(Long celebrity_Id) {
+    public FlightsDTO setCelebrity_Id(Long celebrity_Id) {
         this.celebrity_Id = celebrity_Id;
+        return this;
     }
 
     public Long getJet_Id() {
         return jet_Id;
     }
 
-    public void setJet_Id(Long jet_Id) {
+    public FlightsDTO setJet_Id(Long jet_Id) {
         this.jet_Id = jet_Id;
+        return this;
     }
 
     public Flights.Purpose getPurpose() {
         return purpose;
     }
 
-    public void setPurpose(Flights.Purpose purpose) {
+    public FlightsDTO setPurpose(Flights.Purpose purpose) {
         this.purpose = purpose;
+        return this;
+    }
+
+    public Long getSecurityReport_Id() {
+        return securityReport_Id;
+    }
+
+    public FlightsDTO setSecurityReport_Id(Long securityReport_Id) {
+        this.securityReport_Id = securityReport_Id;
+        return this;
     }
 }
