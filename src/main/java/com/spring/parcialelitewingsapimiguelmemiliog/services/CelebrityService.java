@@ -51,7 +51,6 @@ public class CelebrityService implements ICelebrityService{
         Optional<Celebrity> foundCeleb = celebrityRepository.findById(id);
 
         if(foundCeleb.isPresent()) {
-            foundCeleb.get().setId(celebrity.getId());
             foundCeleb.get().setName(celebrity.getName());
             foundCeleb.get().setProfession(celebrity.getProfession());
             foundCeleb.get().setNet_worth(celebrity.getNet_worth());

@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class SecurityReportService implements ISecurityReportService {
 
+    @Autowired
     private IFlightsRepository flightsRepository;
 
     @Autowired

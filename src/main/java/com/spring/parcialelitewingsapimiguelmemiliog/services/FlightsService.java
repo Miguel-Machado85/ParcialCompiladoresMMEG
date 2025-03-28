@@ -8,6 +8,7 @@ import com.spring.parcialelitewingsapimiguelmemiliog.repositories.ICelebrityRepo
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.IFlightsRepository;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.IPrivateJetRepository;
 import com.spring.parcialelitewingsapimiguelmemiliog.repositories.ISecurityReportRepository;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -43,7 +44,6 @@ public class FlightsService implements IFlightsService {
                 .setCelebrity_Id(flights.getCelebrity().getId())
                 .setJet_Id(flights.getPrivateJet().getId())
                 .setPurpose(flights.getPurpose())
-                .setSecurityReport_Id(flights.getSecurityReport().getId())
                 .build();
     }
 
@@ -51,8 +51,6 @@ public class FlightsService implements IFlightsService {
         Celebrity celebrity= celebrityRepository.findById(flightsDTO.getCelebrity_Id()).get();
 
         PrivateJet privateJet = privateJetRepository.findById(flightsDTO.getJet_Id()).get();
-
-        SecurityReport securityReport = securityReportRepository.findById(flightsDTO.getSecurityReport_Id()).get();
 
         return Flights.builder()
                 .setId(flightsDTO.getId())
@@ -63,12 +61,11 @@ public class FlightsService implements IFlightsService {
                 .setCelebrity(celebrity)
                 .setPrivateJet(privateJet)
                 .setPurpose(flightsDTO.getPurpose())
-                .setSecurityReport(securityReport)
                 .build();
     }
 
     @Override
-    public FlightsDTO registerFlight(FlightsDTO flightsDTO) {
+    public FlightsDTO registerFlight(@Valid FlightsDTO flightsDTO) {
         Flights flights = DTOtoEntity(flightsDTO);
         Flights savedFlights = flightsRepository.save(flights);
         return EntityToDTO(savedFlights);
@@ -87,7 +84,7 @@ public class FlightsService implements IFlightsService {
 
     @Override
     public List<FlightsDTO> retrieveFlaggedFlights() {
-        List<FlightsDTO> flaggedFlights= flightsRepository.findFlightsByPurpose("Suspicious").stream().map(this::EntityToDTO).collect(Collectors.toList());
+        List<FlightsDTO> flaggedFlights= flightsRepository.findFlightsByPurpose(Flights.Purpose.Suspicious).stream().map(this::EntityToDTO).collect(Collectors.toList());
         return flaggedFlights;
     }
 }

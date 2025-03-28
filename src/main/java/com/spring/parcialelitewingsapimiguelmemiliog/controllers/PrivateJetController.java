@@ -17,13 +17,13 @@ public class PrivateJetController {
     @Autowired
     private IPrivateJetService privateJetService;
 
-    @GetMapping("/")
+    @PostMapping("/")
     public ResponseEntity<PrivateJetDTO> addJet(@Valid @RequestBody PrivateJetDTO privateJetDTO){
         PrivateJetDTO addedJet = privateJetService.addPrivateJet(privateJetDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(addedJet);
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<PrivateJetDTO> getJetDetails(@PathVariable Long id){
         Optional<PrivateJetDTO> foundJet = privateJetService.getPrivateJetById(id);
         return foundJet.map(privateJetDTO -> new ResponseEntity<PrivateJetDTO>(privateJetDTO, HttpStatus.OK))

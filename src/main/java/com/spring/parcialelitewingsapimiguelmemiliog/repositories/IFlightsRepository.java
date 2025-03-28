@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface IFlightsRepository extends JpaRepository<Flights, Long> {
-    public List<Flights> findFlightsByPurpose(String purpose);
+    public List<Flights> findFlightsByPurpose(Flights.Purpose purpose);
 }

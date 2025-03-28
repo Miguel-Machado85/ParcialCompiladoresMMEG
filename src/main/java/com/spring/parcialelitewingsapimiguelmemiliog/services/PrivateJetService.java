@@ -55,7 +55,12 @@ public class PrivateJetService implements IPrivateJetService{
         if (foundJet.isPresent()) {
             foundJet.get().setModel(privateJetDTO.getModel());
             foundJet.get().setCapacity(privateJetDTO.getCapacity());
-            foundJet.get().setOwner(foundJet.get().getOwner());
+            Optional<Celebrity> newOwner = celebrityRepository.findById(privateJetDTO.getOwnerId());
+            if (newOwner.isPresent()) {
+                foundJet.get().setOwner(newOwner.get());
+            } else{
+                return Optional.empty();
+            }
 
             privateJetRepository.save(foundJet.get());
             return foundJet.map(this::convertJetToDTO);

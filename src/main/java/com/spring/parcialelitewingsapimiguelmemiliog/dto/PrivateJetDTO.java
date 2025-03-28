@@ -1,6 +1,8 @@
 package com.spring.parcialelitewingsapimiguelmemiliog.dto;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,8 @@ public class PrivateJetDTO {
     @NotBlank(message = "The jet must have a model")
     private String model;
 
-    @NotBlank(message = "The jet's capacity must be listed")
+    @NotNull(message = "The jet's capacity must be listed")
+    @Min(1)
     private int capacity;
 
     private Long ownerId;

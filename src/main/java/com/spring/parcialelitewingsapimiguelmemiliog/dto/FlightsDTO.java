@@ -32,10 +32,8 @@ public class FlightsDTO {
 
     private Long jet_Id;
 
-    @NotBlank(message = "Valid purpose required")
+    @NotNull(message = "Valid purpose required")
     private Flights.Purpose purpose;
-
-    private Long securityReport_Id;
 
     public FlightsDTO() {
     }
@@ -117,15 +115,6 @@ public class FlightsDTO {
 
     public FlightsDTO setPurpose(Flights.Purpose purpose) {
         this.purpose = purpose;
-        return this;
-    }
-
-    public Long getSecurityReport_Id() {
-        return securityReport_Id;
-    }
-
-    public FlightsDTO setSecurityReport_Id(Long securityReport_Id) {
-        this.securityReport_Id = securityReport_Id;
         return this;
     }
 }
