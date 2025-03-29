@@ -30,7 +30,7 @@ public class SecurityReportController {
         return ResponseEntity.status(HttpStatus.OK).body(unresolvedReports);
     }
 
-    @PatchMapping(path = "/{id}/resolve")
+    @PatchMapping(path = "/security-reports/{id}/resolve")
     public ResponseEntity<SecurityReportDTO> resolveReport(@PathVariable Long id) {
         SecurityReportDTO report = securityReportService.resolveReport(id);
         return ResponseEntity.status(HttpStatus.OK).body(report);
